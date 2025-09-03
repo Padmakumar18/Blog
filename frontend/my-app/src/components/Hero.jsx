@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaArrowDown, FaPlay } from "react-icons/fa";
+import { FaArrowDown, FaPlay, FaStar } from "react-icons/fa";
 
 const Hero = () => {
   const scrollToBlog = () => {
@@ -12,131 +12,260 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary-50 to-white"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-neutral-50 via-primary-50/30 to-secondary-50/20"
     >
-      {/* Background Elements */}
+      {/* Smooth Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Floating geometric shapes */}
         <motion.div
           animate={{
-            rotate: 360,
+            rotate: [0, 360],
             scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -top-40 -right-40 w-80 h-80 bg-primary-100 rounded-full opacity-20"
-        />
-        <motion.div
-          animate={{
-            rotate: -360,
-            scale: [1, 1.2, 1],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
-          className="absolute -bottom-40 -left-40 w-96 h-96 bg-secondary-100 rounded-full opacity-20"
+          className="absolute top-20 right-20 w-64 h-64 bg-gradient-to-br from-primary-200/20 to-secondary-200/20 rounded-full blur-2xl"
         />
+
+        <motion.div
+          animate={{
+            rotate: [360, 0],
+            scale: [1, 1.2, 1],
+            x: [0, -40, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-tr from-accent-200/15 to-primary-200/15 rounded-full blur-3xl"
+        />
+
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 bg-grid opacity-30" />
+
+        {/* Floating particles */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, Math.sin(i) * 20, 0],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 4 + i * 0.5,
+              repeat: Infinity,
+              delay: i * 0.3,
+              ease: "easeInOut",
+            }}
+            className="absolute w-1 h-1 bg-primary-400 rounded-full"
+            style={{
+              left: `${15 + i * 10}%`,
+              top: `${25 + i * 8}%`,
+            }}
+          />
+        ))}
       </div>
 
-      <div className="container-custom section-padding relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="container relative z-10 px-3 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        <div className="text-center max-w-6xl mx-auto">
           {/* Main Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight"
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="relative mb-8 sm:mb-12"
           >
-            Welcome to <span className="gradient-text">My Blog</span>
-          </motion.h1>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-neutral-900 mb-6 sm:mb-8 leading-[1.1] sm:leading-tight tracking-tight px-2 sm:px-0">
+              <span className="block sm:inline">Welcome to</span>{" "}
+              <span className="relative inline-block">
+                <span className="text-gradient">My Blog</span>
+                <motion.div
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    opacity: [0.5, 0.8, 0.5],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -inset-4 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 rounded-3xl blur-xl -z-10"
+                />
+              </span>
+            </h1>
+
+            {/* Decorative elements */}
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-8 -right-8 text-4xl opacity-60"
+            >
+              ✨
+            </motion.div>
+          </motion.div>
 
           {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed"
+            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+            className="text-lg sm:text-xl md:text-2xl text-neutral-600 leading-relaxed mb-16 max-w-4xl mx-auto"
           >
             Discover amazing stories, insights, and experiences through my
-            personal blog. Join me on this journey of learning and sharing.
+            personal blog. Join me on this journey of{" "}
+            <span className="text-gradient font-semibold">
+              continuous learning
+            </span>{" "}
+            and{" "}
+            <span className="text-gradient-accent font-semibold">
+              creative sharing
+            </span>
+            .
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-24"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToBlog}
-              className="btn-primary flex items-center space-x-2"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl group"
             >
-              <span>Explore Blog</span>
-              <FaArrowDown className="w-4 h-4" />
+              <span>Explore Articles</span>
+              <motion.div
+                animate={{ y: [0, 4, 0] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <FaArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform duration-300" />
+              </motion.div>
             </motion.button>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="btn-secondary flex items-center space-x-2"
+              className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm border border-neutral-200 hover:bg-white hover:border-primary-300 text-neutral-700 hover:text-primary-700 font-semibold px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl group"
             >
-              <FaPlay className="w-4 h-4" />
-              <span>Watch Video</span>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                transition={{ duration: 0.3 }}
+                className="w-6 h-6 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center"
+              >
+                <FaPlay className="w-3 h-3 text-white ml-0.5" />
+              </motion.div>
+              <span>Watch Demo</span>
             </motion.button>
           </motion.div>
 
-          {/* Stats */}
+          {/* Enhanced Stats */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
+            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"
           >
             {[
-              { number: "50+", label: "Articles" },
-              { number: "10K+", label: "Readers" },
-              { number: "5★", label: "Rating" },
+              {
+                number: "50+",
+                label: "Articles Published",
+                icon: "📚",
+                gradient: "from-primary-500 to-primary-700",
+                bgGradient: "from-primary-50 to-primary-100",
+              },
+              {
+                number: "10K+",
+                label: "Happy Readers",
+                icon: "👥",
+                gradient: "from-secondary-500 to-secondary-700",
+                bgGradient: "from-secondary-50 to-secondary-100",
+              },
+              {
+                number: "4.9",
+                label: "Average Rating",
+                icon: <FaStar className="w-8 h-8 text-accent-500" />,
+                gradient: "from-accent-500 to-accent-700",
+                bgGradient: "from-accent-50 to-accent-100",
+              },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
-                className="text-center"
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                  duration: 0.8,
+                  delay: 1 + index * 0.1,
+                  ease: "easeOut",
+                }}
+                whileHover={{ scale: 1.05, y: -8 }}
+                className="group cursor-pointer"
               >
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-                  {stat.number}
+                <div
+                  className={`bg-white/80 backdrop-blur-sm border border-white/20 rounded-3xl shadow-lg hover:shadow-xl transition-all duration-500 p-8 text-center bg-gradient-to-br ${stat.bgGradient} border-0`}
+                >
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      delay: index * 0.5,
+                      ease: "easeInOut",
+                    }}
+                    className="text-5xl mb-6 flex justify-center"
+                  >
+                    {typeof stat.icon === "string" ? stat.icon : stat.icon}
+                  </motion.div>
+                  <div
+                    className={`text-4xl md:text-5xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent mb-4`}
+                  >
+                    {stat.number}
+                  </div>
+                  <div className="text-neutral-700 font-semibold text-lg">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Smooth Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 2 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-6 h-10 border-2 border-neutral-300 rounded-full flex justify-center cursor-pointer hover:border-primary-400 transition-colors duration-300"
+          onClick={scrollToBlog}
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1 h-3 bg-neutral-400 rounded-full mt-2"
           />
         </motion.div>
       </motion.div>

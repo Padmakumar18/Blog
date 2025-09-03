@@ -35,22 +35,27 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white relative">
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-secondary-600/10 rounded-full blur-3xl" />
+      </div>
       {/* Back to Top Button */}
       <motion.button
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.1, y: -2 }}
         whileTap={{ scale: 0.9 }}
         onClick={scrollToTop}
-        className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-primary-600 hover:bg-primary-700 rounded-full flex items-center justify-center shadow-lg transition-colors duration-200"
+        className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 rounded-full flex items-center justify-center shadow-2xl transition-all duration-300 z-10 glow-effect"
       >
         <FaArrowUp className="w-5 h-5" />
       </motion.button>
 
-      <div className="container-custom py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <motion.div
@@ -60,11 +65,17 @@ const Footer = () => {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">B</span>
-              </div>
-              <span className="text-xl font-bold">BlogSite</span>
+            <div className="flex items-center space-x-3 mb-6">
+              <motion.div
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.5 }}
+                className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-600 rounded-xl flex items-center justify-center shadow-lg"
+              >
+                <span className="text-white font-black text-xl">B</span>
+              </motion.div>
+              <span className="text-2xl font-black bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                BlogSite
+              </span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed">
               A modern blog platform where creativity meets technology. Sharing

@@ -1,40 +1,68 @@
-/* Custom styles for the blog application */
-/* Most styling is handled by Tailwind CSS */
+/* Modern Blog Application Styles */
+/* Enhanced with smooth animations and modern aesthetics */
 
 .App {
   min-height: 100vh;
+  background: linear-gradient(135deg, #fafafa 0%, #f0f4ff 100%);
+  overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+/* Ensure proper spacing and alignment */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix any potential layout shifts */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure consistent spacing */
+section {
+  position: relative;
+  width: 100%;
+}
+
+/* Enhanced Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 4px;
+  background: linear-gradient(to bottom, #6366f1, #4f46e5);
+  border-radius: 10px;
+  border: 1px solid #f8fafc;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563eb;
+  background: linear-gradient(to bottom, #4f46e5, #4338ca);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
-/* Smooth transitions for all elements */
+/* Smooth Global Transitions */
 * {
-  transition: color 0.2s ease, background-color 0.2s ease,
-    border-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Focus styles */
+/* Enhanced Focus Styles */
 *:focus {
   outline: none;
 }
 
-/* Line clamp utility for text truncation */
+*:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Text Utilities */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -47,4 +75,89 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Smooth Image Loading */
+img {
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Enhanced Selection */
+::selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: #1e293b;
+}
+
+::-moz-selection {
+  background: rgba(99, 102, 241, 0.2);
+  color: #1e293b;
+}
+
+/* Smooth Page Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid #000;
+  }
+
+  .btn-primary {
+    border: 2px solid #000;
+  }
 }

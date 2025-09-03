@@ -2,37 +2,247 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 @layer base {
+  * {
+    @apply border-border;
+  }
+
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
-    font-family: "Inter", system-ui, sans-serif;
-    line-height: 1.6;
+    @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+    line-height: 1.7;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-400 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-500;
   }
 }
 
 @layer components {
+  /* Modern Button System */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
   .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply btn bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-soft hover:shadow-glow focus:ring-primary-500 px-8 py-4 text-lg;
   }
 
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-600 font-medium py-3 px-6 rounded-lg border border-primary-600 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply btn bg-white/90 backdrop-blur-sm border border-neutral-200 hover:bg-white hover:border-primary-300 text-neutral-700 hover:text-primary-700 shadow-soft hover:shadow-medium px-8 py-4 text-lg;
   }
 
-  .section-padding {
-    @apply py-16 px-4 sm:px-6 lg:px-8;
+  .btn-ghost {
+    @apply btn bg-transparent hover:bg-primary-50 text-primary-600 hover:text-primary-700 px-6 py-3;
   }
 
-  .container-custom {
-    @apply max-w-7xl mx-auto;
+  .btn-sm {
+    @apply px-4 py-2 text-sm rounded-xl;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+  .btn-lg {
+    @apply px-10 py-5 text-xl rounded-3xl;
+  }
+
+  /* Layout Components */
+  .section {
+    @apply py-24 px-4 sm:px-6 lg:px-8;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-sm {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-xs {
+    @apply max-w-2xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Card System */
+  .card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 rounded-3xl shadow-soft transition-all duration-500 w-full;
+  }
+
+  .card-hover {
+    @apply hover:shadow-large hover:-translate-y-1;
+  }
+
+  .card-glass {
+    @apply bg-white/60 backdrop-blur-md border border-white/30;
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-white/90 to-white/60 backdrop-blur-md;
+  }
+
+  /* Responsive Grid Fixes */
+  .grid-responsive {
+    @apply grid gap-6 sm:gap-8;
+  }
+
+  .grid-responsive.cols-1 {
+    @apply grid-cols-1;
+  }
+
+  .grid-responsive.cols-2 {
+    @apply grid-cols-1 md:grid-cols-2;
+  }
+
+  .grid-responsive.cols-3 {
+    @apply grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Text Styles */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-700 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent-500 to-primary-600 bg-clip-text text-transparent;
+  }
+
+  .heading-1 {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight text-center;
+  }
+
+  .heading-2 {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-center;
+  }
+
+  .heading-3 {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold leading-tight;
+  }
+
+  .body-large {
+    @apply text-lg sm:text-xl md:text-2xl leading-relaxed text-neutral-600 text-center;
+  }
+
+  .body {
+    @apply text-base sm:text-lg leading-relaxed text-neutral-600;
+  }
+
+  /* Animation Utilities */
+  .animate-in {
+    @apply animate-fade-in;
+  }
+
+  .animate-up {
+    @apply animate-slide-up;
+  }
+
+  .animate-scale {
+    @apply animate-scale-in;
+  }
+
+  /* Background Patterns */
+  .bg-grid {
+    background-image: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.1) 1px,
+      transparent 1px
+    );
+    background-size: 20px 20px;
+  }
+
+  .bg-dots {
+    background-image: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.15) 2px,
+      transparent 2px
+    );
+    background-size: 30px 30px;
+  }
+
+  /* Smooth Transitions */
+  .smooth-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .smooth-transform {
+    @apply transition-transform duration-500 ease-out;
+  }
+
+  /* Glassmorphism Effects */
+  .glass {
+    @apply bg-white/20 backdrop-blur-md border border-white/30;
+  }
+
+  .glass-strong {
+    @apply bg-white/40 backdrop-blur-lg border border-white/40;
+  }
+
+  /* Floating Elements */
+  .float {
+    @apply animate-float;
+  }
+
+  .float-delayed {
+    animation: float 8s ease-in-out infinite 2s;
+  }
+
+  .float-slow {
+    animation: float 12s ease-in-out infinite;
+  }
+
+  /* Glow Effects */
+  .glow {
+    @apply shadow-glow;
+  }
+
+  .glow-lg {
+    @apply shadow-glow-lg;
+  }
+
+  /* Interactive States */
+  .interactive {
+    @apply smooth-hover hover:scale-105 active:scale-95;
+  }
+
+  .interactive-lift {
+    @apply smooth-hover hover:-translate-y-2 hover:shadow-large;
+  }
+
+  /* Shimmer Effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s infinite;
   }
 }
